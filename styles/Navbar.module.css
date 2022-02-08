@@ -1,0 +1,112 @@
+.container{
+    height: 100px;
+    background-color: aqua;
+    background-color: #d1411e;
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+}
+.wrapper{
+    height: 60%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.left__container{
+flex: 1;
+display: flex;
+align-items: center;
+}
+
+.img__container{
+background-color: white;
+height: 50px;
+width: 50px;
+border-radius: 50%;
+padding: 10px;
+margin-right: 20px;
+}
+.img__container_right{
+display: flex;
+flex-direction: column;
+}
+.img__container_right>p{
+    color: white;
+    font-size: 12px;
+    /* margin-bottom: 10px; */
+    font-weight: 500;
+}
+.img__container_right>span{
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+
+}
+.center__container{
+flex: 3;
+height: 100%;
+width: 100%;
+/* background: #000; */
+display: flex;
+align-items: center;
+}
+.center__container>ul{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+}
+.center__container>ul>li{
+    color: #f9f9f9;
+    font-size: 1.3rem;
+    cursor: pointer;
+    /* padding: 5px; */
+    border-radius: 10px;
+    transition: all 0.5s ease;
+}
+.center__container>ul>li:hover{
+    background-color: rgba(65, 60, 60,0.2);
+}
+.center__container>ul>h1{
+    color: rgb(245, 245, 240);
+    font-size: 3rem;
+    font-weight: 400;
+    cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
+}
+.right__container{
+flex: 1;
+height: 100%;
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: flex-end;
+}
+.right__wrapper{
+display: flex;
+align-items: center;
+justify-content: center;
+position: relative;
+height: 40px;
+width: 40px;
+/* background-color: black; */
+
+}
+.right__badge{
+position: absolute;
+top: -5px;
+right: -7px;
+background-color: rgb(10, 10, 136);
+display: flex;
+align-items: center;
+justify-content: center;
+color: #f9f9f9;
+padding: 7px;
+height: 20px;
+width: 20px;
+border-radius: 50%;
+}
+
+
