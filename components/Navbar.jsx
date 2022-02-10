@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import styles from "../styles/Navbar.module.css"
 const Navbar = () => {
@@ -19,17 +20,21 @@ const Navbar = () => {
           <li>Home</li>
           <li>Products</li>
           <li>Menu</li>
+          <Link href={"/"}>
           <h1>D-jango</h1>
+          </Link>
           <li>Events</li>
           <li>Blog</li>
           <li>Contact</li>
         </ul>
       </div>
       <div className={styles.right__container}>
+          <Link href="/cart">
         <div className={styles.right__wrapper}>
           <Image src="/image/cart.png" alt="" height={"32"} width="32" />
         <span className={styles.right__badge} >2</span>
         </div>
+          </Link>
       </div>
     </div>
       </div>;
