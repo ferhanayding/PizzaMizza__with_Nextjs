@@ -27,3 +27,13 @@
     align-items: flex-start;
 
 }
+
+@media screen and (max-width:480px) {
+    .container{
+        text-align: center;
+    }
+   .pizza__list_title{
+       font-size: 20px;
+   } 
+ 
+}

@@ -1,8 +1,6 @@
 import React from 'react'
 import style from "../styles/PizzaList.module.css"
-import 'pure-react-carousel/dist/react-carousel.es.css';
 import PizzaItems from './PizzaList/PizzaItems'
-import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 
 const PizzaList = () => {
   return (

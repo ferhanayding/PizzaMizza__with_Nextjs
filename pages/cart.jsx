@@ -32,9 +32,17 @@ const Cart = () => {
                 <span className={styles.name}>CORALZO</span>
                 </td>
                 <td className={styles.product__td}>
-                <span className={styles.extras}>
-                Double ingredient, spicy sauce
-              </span>
+                <div className={styles.extras}>
+                    <button className={styles.extras__button}>See</button>
+                    <div className={styles.extras__drowdown} >
+                    <span>
+                Double ingredient
+                    </span>
+                <span>
+                 spicy sauce
+                </span>
+                    </div>
+              </div>
                 </td>
                 <td className={styles.product__td}>
                 <span className={styles.price}>$19.90</span>
@@ -54,7 +62,7 @@ const Cart = () => {
        </div>
        <div className={styles.right__container}>
            <div className={styles.right__wrapper}>
-               <h1 className={styles.cart__title}>CART TOTAL</h1>
+               {/* <h1 className={styles.cart__title}>CART TOTAL</h1> */}
                 <div className={styles.cart__items}>
                 <span>Subtotal:</span>
                 <span>$79.44</span>
@@ -68,7 +76,7 @@ const Cart = () => {
                 <span>$79.44</span>
                     </div>
                 <div className={styles.cart__button_container}>
-                <button>Checkout now!</button>
+                <button>Check!</button>
                     </div>
             
                 

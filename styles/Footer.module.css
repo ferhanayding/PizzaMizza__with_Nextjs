@@ -34,3 +34,19 @@
     color: rgb(211, 211, 211);
   }
   
+  @media screen and (max-width:566px) {
+    .container{
+      height: auto;
+      text-align: center;
+    }
+    .item:first-child{
+      display: none;
+    }
+    .item:last-child{
+     flex-direction: column;
+    }
+    .motto{
+      font-size: 20px;
+    }
+
+  }

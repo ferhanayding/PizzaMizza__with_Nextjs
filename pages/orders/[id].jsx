@@ -4,10 +4,11 @@ import styles from "../../styles/Order.module.css"
 const Order = () => {
   const status= 1;
   const statusClass=(index)=>{
-    if(index - status <1) return styles.done;
-    if(index - status ===1) return styles.inProgress;
-    if(index - status >1) return styles.undone;
-  }
+    if(index - status<1) return styles.done
+    if(index - status===1) return styles.inProgress
+    if(index - status>1) return styles.undone
+  }  
+
   return (
     <div className={styles.container} >
             <div className={styles.left}>

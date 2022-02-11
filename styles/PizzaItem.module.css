@@ -1,50 +1,66 @@
 .container{
 height: 100%;
 width: 100%;
-background-color: teal;
-border-radius: 20px;
-position: relative;
 display: flex;
-box-shadow: 10px 3px 10px rgba(182, 32, 32, 0.2);
 
 align-items: center;
 justify-content: center;
-transition: all 1s ease-in-out;
 cursor: pointer;
+display: flex;
+flex-direction: column;
+}
+.left__container{
+    
+    position: relative;
+    border-radius: 20px;
+    box-shadow: 10px 3px 10px rgba(182, 32, 32, 0.2);
+    background-color: teal;
+    display: flex;
+    align-items: center;
+    transition: all 1s ease-in-out;
+    justify-content: center;
 }
 .img__container{
-width: 100%;
-height: 100%;
-display: flex;
-align-items: center;
-justify-content: center;
-
+    width: 100%;
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    transition: all 1s ease;
+    justify-content: center;
+    
 }
-.container:hover{
-    background-color: #D1411E;
-}
-.container:hover>.pizza___each__items_container{
-    z-index: 3;
-}
-.container:hover>.img__container{
-    opacity: 0.1;
+@media screen and (min-width:1000px) {
+    
+    .left__container:hover{
+        background-color: #D1411E;
+    }
+    .left__container:hover>.pizza___each__items_container{
+        z-index: 3;
+    }
+    .left__container:hover>.img__container{
+        opacity: 0.1;
+        /* z-index: -1; */
+    }
 }
 .pizza___each__items_container{
-position: absolute;
-/* background-color: #D1411E; */
-display: inline;
-
-flex-direction: column;
+    transition: all 0.3s ease;
+    /* animation: ferhan 1s ;
+    @ */
+    position: absolute;
+    display: inline;
+    flex-direction: column;
 justify-content: center;
 align-items: center;
 color: white;
-
 border-radius: 20px;
-
 z-index: -1;
 cursor: pointer;
 margin: auto;
 
+}
+.mobile{
+    display: none;
 }
 .wrapper{
     display: flex;
@@ -86,4 +102,26 @@ font-family: 'Courier New', Courier, monospace;
     
 
 
+}
+@media screen and (max-width:480px) {
+.container{
+    width: 100%;
+    
+}
+
+.wrapper{
+    display: none
+}
+.mobile{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.mobile>h3{
+    margin-right: 10px;
+    font-weight: 500;
+    color: #D1411E;
+
+}
 }
