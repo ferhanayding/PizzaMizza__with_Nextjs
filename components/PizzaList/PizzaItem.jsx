@@ -1,31 +1,37 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 import style from "../../styles/PizzaItem.module.css"
-const PizzaItem = () => {
+import { truncate } from '../../utils/function'
+const PizzaItem = ({pizza}) => {
+console.log(pizza)
+
   return (
     <div className={style.container} >
+      <Link href={`/product/${pizza._id}`} >
       <div className={style.left__container} >
 
         <div className={style.img__container} >
-        <Image src={"/image/pizza.png"} width="250" height={"250"} alt='ded' />
+        <Image src={pizza.img} width="250" height={"250"} alt='ded' />
         </div>
         <div className={style.pizza___each__items_container}>
           <div className={style.wrapper} >
       
             <h3 className={style.title}>
-              Gabriella
+              {pizza.title}
             </h3>
-            <button className={style.order__button} >Order Now</button>
-            <span className={style.price} >$19.99</span>
+            <span className={style.price} >$ {pizza.prices[0]}</span>
+            <p>{truncate(pizza?.desc,15)}</p>
           </div>
         </div>
       </div>
+      </Link>
         <div className={style.mobile} >
         <h3 className={style.mobile__title}>
-              Gabriella
+        {pizza.title}
             </h3>
-            {/* <button className={style.mobile__order_button} >Order Now</button> */}
-            <span className={style.mobile__price} >$19.99</span>
+           
+            <span className={style.mobile__price} >$ {pizza?.prices[0]}</span>
         </div>
     </div>
   )
