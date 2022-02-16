@@ -4,7 +4,7 @@ import React from 'react'
 import style from "../../styles/PizzaItem.module.css"
 import { truncate } from '../../utils/function'
 const PizzaItem = ({pizza}) => {
-console.log(pizza)
+// console.log(pizza)
 
   return (
     <div className={style.container} >

@@ -1,7 +1,13 @@
 import Image from 'next/image'
 import React from 'react'
+import { useSelector } from 'react-redux'
 import styles from "../styles/Cart.module.css"
 const Cart = () => {
+    const cart = useSelector(state=> state.cart)
+    const {products,quantity,total} = cart
+    console.log(products)
+    console.log(quantity)
+
   return (
     <div className={styles.container}  >
        <div className={styles.left__container}>
@@ -14,14 +20,15 @@ const Cart = () => {
             <th className={styles.th}>Quantity</th>
             <th className={styles.th} >Total</th>
             </tr>
-            {/* ---------------------- */}
-        { new Array(3).fill(
+           
+        {   
+            products.map((product)=>(
 
-            <tr  className={styles.tr__product} >
+                <tr  className={styles.tr__product} >
                 <td className={styles.product__td}>
                     <div className={styles.img__container_td}>
                     <Image
-                  src="/image/pizza.png"
+                  src={product.img}
                   layout="fill"
                   objectFit="cover"
                   alt=""
@@ -29,35 +36,36 @@ const Cart = () => {
                     </div>
                 </td>
                 <td className={styles.product__td}>
-                <span className={styles.name}>CORALZO</span>
+                <span className={styles.name}>{product.title}</span>
                 </td>
                 <td className={styles.product__td}>
                 <div className={styles.extras}>
                     <button className={styles.extras__button}>See</button>
                     <div className={styles.extras__drowdown} >
-                    <span>
-                Double ingredient
+                  {product.extras.map((item)=>(
+                      <span key={item._id} >
+                     {item.text}
                     </span>
-                <span>
-                 spicy sauce
-                </span>
+                        ))}
+               
                     </div>
               </div>
                 </td>
                 <td className={styles.product__td}>
-                <span className={styles.price}>$19.90</span>
+                <span className={styles.price}>${product.price}</span>
                 </td>
                 <td className={styles.product__td}>
-                <span className={styles.quantity}>2</span>
+                <span className={styles.quantity}>{product.total}</span>
                 </td>
                 <td className={styles.product__td}>
-                <span className={styles.total}>$39.80</span>
+                <span className={styles.total}>${total}</span>
                 </td>
                 
             </tr>
-                )  
-            }
-            {/* -------------------------- */}
+                 
+                 ))
+                }
+            
         </table>
        </div>
        <div className={styles.right__container}>

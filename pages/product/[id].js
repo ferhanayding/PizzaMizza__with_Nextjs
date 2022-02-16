@@ -1,16 +1,41 @@
 import Image from "next/image";
+import Link from "next/link";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../../store/cartSlice";
 import styles from "../../styles/Product.module.css";
-const Product = () => {
+import api from "../../utils/api/api";
+const Product = ({ pizza }) => {
+  const [price, setPrice] = useState(pizza.prices[0]);
   const [size, setSize] = useState(0);
   const [pizzaQuantity, setPizzaQuantity] = useState(1);
+  const [extras, setExtras] = useState([]);
+  const dispatch = useDispatch();
+  // console.log(extras);
+  const handleSize = (sizeIndex) => {
+    const difference = pizza.prices[sizeIndex] - pizza.prices[size];
+    setSize(sizeIndex);
+    changePrice(difference);
+  };
+  const changePrice = (number) => {
+    setPrice(price + number);
 
-  const pizza = {
-    id: 1,
-    img: "/image/pizza.png",
-    name: "CAMPAGNOLA",
-    price: [19.9, 23.9, 27.9],
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis arcu purus, rhoncus fringilla vestibulum vel, dignissim vel ante. Nulla facilisi. Nullam a urna sit amet tellus pellentesque egestas in in ante.",
+    // console.log(price);
+  };
+  const handleChange = (e, option) => {
+    const checked = e.target.checked;
+    // console.log(checked);
+    if (checked) {
+      changePrice(option.price);
+      setExtras([...extras, option]);
+      // setExtras(prev => [...prev,extra]) buda olur
+    } else {
+      changePrice(-option.price);
+      setExtras(extras.filter((extra) => extra._id !== option._id));
+    }
+  };
+  const onClick = () => {
+    dispatch(addProduct({ ...pizza, price, size, pizzaQuantity, extras }));
   };
 
   return (
@@ -21,12 +46,10 @@ const Product = () => {
         </div>
       </div>
       <div className={styles.right__container}>
-        <h1 className={styles.right__title}>{pizza.name}</h1>
+        <h1 className={styles.right__title}>{pizza.title}</h1>
         <div className={styles.right__wrapper}>
           <div className={styles.items}>
-            <span className={styles.price}>
-              {(pizzaQuantity * pizza.price[size]).toFixed(2)}
-            </span>
+            <span className={styles.price}>${price}</span>
             <p className={styles.desc}>
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Excepturi, aperiam?
@@ -38,7 +61,7 @@ const Product = () => {
             <div className={styles.size__container}>
               <div
                 className={styles.size__img_container}
-                onClick={() => setSize(0)}
+                onClick={() => handleSize(0)}
               >
                 <Image
                   src={"/image/size.png"}
@@ -49,7 +72,7 @@ const Product = () => {
               </div>
               <div
                 className={styles.size__img_container}
-                onClick={() => setSize(1)}
+                onClick={() => handleSize(1)}
               >
                 <Image
                   src={"/image/size.png"}
@@ -60,7 +83,7 @@ const Product = () => {
               </div>
               <div
                 className={styles.size__img_container}
-                onClick={() => setSize(2)}
+                onClick={() => handleSize(2)}
               >
                 <Image
                   src={"/image/size.png"}
@@ -76,50 +99,20 @@ const Product = () => {
             <span className={styles.item}>Choose addinational ingredients</span>
             {/* ------------------------------------ option */}
             <div className={styles.checkbox__container}>
-              <div className={styles.option__item}>
-                <input
-                  type="checkbox"
-                  id="double"
-                  name="double"
-                  className={styles.checkbox}
-                />
-                <label htmlFor="double" className={styles.label}>
-                  Double Ingredients
-                </label>
-              </div>
-              <div className={styles.option__item}>
-                <input
-                  type="checkbox"
-                  id="double"
-                  name="double"
-                  className={styles.checkbox}
-                />
-                <label htmlFor="double" className={styles.label}>
-                  Extra Cheese
-                </label>
-              </div>
-              <div className={styles.option__item}>
-                <input
-                  type="checkbox"
-                  id="double"
-                  name="double"
-                  className={styles.checkbox}
-                />
-                <label htmlFor="double" className={styles.label}>
-                  Spicy Saurce
-                </label>
-              </div>
-              <div className={styles.option__item}>
-                <input
-                  type="checkbox"
-                  id="double"
-                  name="double"
-                  className={styles.checkbox}
-                />
-                <label htmlFor="double" className={styles.label}>
-                  Garlic Saurce
-                </label>
-              </div>
+              {pizza.extraOptions.map((option) => (
+                <div className={styles.option__item} key={option._id}>
+                  <input
+                    type="checkbox"
+                    id={option.text}
+                    name={option.text}
+                    className={styles.checkbox}
+                    onChange={(e) => handleChange(e, option)}
+                  />
+                  <label htmlFor="double" className={styles.label}>
+                    {option.text}
+                  </label>
+                </div>
+              ))}
             </div>
             {/* ----------------------------------- */}
           </div>
@@ -130,12 +123,24 @@ const Product = () => {
               defaultValue={1}
               className={styles.quantity__input}
             />
-            <button className={styles.button}>Add To Card</button>
+            <Link href={"/cart"}>
+              <button className={styles.button} onClick={onClick}>
+                Add To Card
+              </button>
+            </Link>
           </div>
         </div>
       </div>
     </div>
   );
 };
-
 export default Product;
+export const getServerSideProps = async ({ params }) => {
+  const { data } = await api()(`/products/${params.id}`);
+  // console.log(data);
+  return {
+    props: {
+      pizza: data,
+    },
+  };
+};
